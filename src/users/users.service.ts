@@ -5,34 +5,25 @@ import {
     Injectable,
     InternalServerErrorException,
     Logger,
-  } from '@nestjs/common';
-  import { DataSource } from 'typeorm';
-  import { UserEntity } from './users.entity';
-  import {
-    UsernameQuery,
-  } from 'src/datasource/datasource.service';
+} from '@nestjs/common';
+import { UserEntity } from './users.entity';
 import { CreateUserDTO } from 'src/dto/create-user.dto';
+import { sql } from '@vercel/postgres';
   
   @Injectable()
   export class UsersService {
-    private userRepository;
-    private customUserRepository;
     private logger = new Logger();
     
-    constructor(
-      private dataSource: DataSource,
-    ) {
-      this.userRepository = this.dataSource.getRepository(UserEntity);
-    }
+    constructor() {}
 
     async createUser(createUser: CreateUserDTO): Promise<UserEntity> {
       try {
-        const user = await this.userRepository.create(createUser);
-        return await this.userRepository.save(user);
+        const user = await sql`INSERT INTO users (name, password) VALUES (${createUser.name}, ${createUser.password}) RETURNING *`
+        return new UserEntity(user.rows[0].id, createUser.name, createUser.password);
       } catch (err) {
         if (err.code == 23505) {
           this.logger.error(err.message, err.stack);
-          throw new HttpException('Username already exists', HttpStatus.CONFLICT);
+          throw new HttpException('name already exists', HttpStatus.CONFLICT);
         }
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
@@ -43,7 +34,8 @@ import { CreateUserDTO } from 'src/dto/create-user.dto';
 
     async getAll(): Promise<UserEntity[]> {
       try {
-        return await this.userRepository.find();
+        const users = await sql`SELECT * FROM users`
+        return users.rows.map(user => new UserEntity(user.id, user.name, user.password));
       } catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
@@ -54,8 +46,8 @@ import { CreateUserDTO } from 'src/dto/create-user.dto';
 
     async updateUser(user: CreateUserDTO, id: number): Promise<UserEntity> {
       try {
-        await this.userRepository.update(id, user);
-        return new UserEntity(id, user.username, user.password);
+        console.log('wip')
+        return new UserEntity(id, user.name, user.password);
       } catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
@@ -64,21 +56,11 @@ import { CreateUserDTO } from 'src/dto/create-user.dto';
       }
     }
 
-    async findOne(username: string): Promise<UserEntity> {
+    async findOne(name: string): Promise<UserEntity> {
       try {
-        return await this.userRepository.findOne({ where:  { username: username } });
+        const user = await sql`SELECT * FROM users WHERE name = ${name}`
+        return new UserEntity(user.rows[0].id, user.rows[0].name, user.rows[0].password);
       }	catch (err) {
-        this.logger.error(err.message, err.stack);
-        throw new InternalServerErrorException(
-          'Something went wrong, Try again!',
-        );
-      }
-    }
-
-    async filterByUsername(usernameQuery: UsernameQuery): Promise<UserEntity[]> {
-      try {
-        return await this.customUserRepository.filterUser(usernameQuery);
-      } catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
           'Something went wrong, Try again!',

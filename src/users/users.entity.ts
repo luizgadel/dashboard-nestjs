@@ -6,14 +6,14 @@ export class UserEntity {
   id: number;
 
   @Column({ unique: true })
-  username: string;
+  name: string;
 
   @Column()
   password: string;
 
-  constructor(id: number, username: string, password: string) {
+  constructor(id: number, name: string, password: string) {
     this.id = id;
-    this.username = username;
+    this.name = name;
     this.password = password;
   }
 }

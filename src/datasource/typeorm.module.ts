@@ -13,11 +13,11 @@ import { Global, Module } from '@nestjs/common';
         try {
           const dataSource = new DataSource({
             type: 'postgres',
-            host: 'localhost',
+            host: process.env.POSTGRES_HOST,
             port: 5432,
-            username: 'usuario',
-            password: 'senha',
-            database: 'banco',
+            username: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
+            database: process.env.POSTGRES_DATABASE,
             synchronize: true,
             entities: [`${__dirname}/../**/**.entity{.ts,.js}`], // this will automatically load all entity file in the src folder
           });
