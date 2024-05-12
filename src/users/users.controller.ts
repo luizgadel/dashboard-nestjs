@@ -1,23 +1,39 @@
 // users.controller.ts
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { CreateUser, UsersService } from './users.service';
+import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
+import { UsersService } from './users.service';
 import { UserEntity } from './users.entity';
-import { UsernameQuery } from 'src/datasource/datasource.service';
+import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { CreateUserDTO } from 'src/dto/create-user.dto';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Post('/create')
-  //   handles the post request to /users/create endpoint to create new user
-  async signUp(@Body() user: CreateUser): Promise<UserEntity> {
+  @ApiBody({ type: CreateUserDTO})
+  async signUp(@Body() user: CreateUserDTO): Promise<UserEntity> {
     return await this.userService.createUser(user);
   }
 
-  @Get('') // get request handler that returns the filtered results of the users table
-  async filterUser(
-    @Query() usernameQuery: UsernameQuery // extracts the username query param for the endpoint url,
-  ): Promise<UserEntity[]> {
-    return await this.userService.filterByUsername(usernameQuery);
+  // @Get('') // get request handler that returns the filtered results of the users table
+  // async filterUser(
+  //   @Query() usernameQuery: UsernameQuery // extracts the username query param for the endpoint url,
+  // ): Promise<UserEntity[]> {
+  //   return await this.userService.filterByUsername(usernameQuery);
+  // }
+
+  @Get('')
+  async getAllUsers(): Promise<UserEntity[]> {
+    return await this.userService.getAll();
+  }
+
+  @Put('/update/:id')
+  @ApiBody({ type: CreateUserDTO})
+  async updateUser(
+    @Query('id') id: number,
+    @Body() user: CreateUserDTO,
+  ): Promise<UserEntity> {
+    return await this.userService.updateUser(user, id);
   }
 }
