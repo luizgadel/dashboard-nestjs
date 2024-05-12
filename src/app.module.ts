@@ -5,9 +5,10 @@ import { TypeOrmModule } from './datasource/typeorm.module';
 import { UsersModule } from './users/users.module';
 import { DataSourceModule } from './datasource/datasource.module';
 import { LoggerMiddleware } from './middlewares/logging';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule, UsersModule, DataSourceModule],
+  imports: [TypeOrmModule, UsersModule, DataSourceModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

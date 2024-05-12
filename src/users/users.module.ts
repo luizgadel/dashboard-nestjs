@@ -8,5 +8,6 @@ import { DataSourceModule } from 'src/datasource/datasource.module';
   imports: [], // add the DataSourceModule to the import array 
   providers: [UsersService],
   controllers: [UsersController],
+  exports: [UsersService],
 })
 export class UsersModule {}

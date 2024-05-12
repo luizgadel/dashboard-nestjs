@@ -9,7 +9,10 @@ async function bootstrap() {
     .setTitle('User API')
     .setDescription('This API has endpoints to manage users\' data')
     .setVersion('1.0')
+    .addTag('auth')
+    .addTag('app')
     .addTag('users')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

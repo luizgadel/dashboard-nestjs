@@ -64,6 +64,17 @@ import { CreateUserDTO } from 'src/dto/create-user.dto';
       }
     }
 
+    async findOne(username: string): Promise<UserEntity> {
+      try {
+        return await this.userRepository.findOne({ where:  { username: username } });
+      }	catch (err) {
+        this.logger.error(err.message, err.stack);
+        throw new InternalServerErrorException(
+          'Something went wrong, Try again!',
+        );
+      }
+    }
+
     async filterByUsername(usernameQuery: UsernameQuery): Promise<UserEntity[]> {
       try {
         return await this.customUserRepository.filterUser(usernameQuery);
