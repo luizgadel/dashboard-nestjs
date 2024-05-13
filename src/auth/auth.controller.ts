@@ -16,7 +16,7 @@ export class AuthController {
     @Post('login')
     @ApiProperty({ type: SignInDTO })
     signIn(@Body() signInDto: SignInDTO) {
-        return this.authService.signIn(signInDto.username, signInDto.password);
+        return this.authService.signIn(signInDto.name, signInDto.password);
     }
 
     @Get('profile')
