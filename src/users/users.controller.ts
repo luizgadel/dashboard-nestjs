@@ -32,7 +32,7 @@ export class UsersController {
   @Put('/update/:id')
   @ApiBody({ type: CreateUserDTO})
   async updateUser(
-    @Query('id') id: number,
+    @Query('id') id: string,
     @Body() user: CreateUserDTO,
   ): Promise<UserEntity> {
     return await this.userService.updateUser(user, id);

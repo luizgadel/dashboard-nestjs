@@ -9,6 +9,7 @@ import {
 import { UserEntity } from './users.entity';
 import { CreateUserDTO } from 'src/dto/create-user.dto';
 import { sql } from '@vercel/postgres';
+import { hash } from 'bcrypt'
   
   @Injectable()
   export class UsersService {
@@ -18,8 +19,10 @@ import { sql } from '@vercel/postgres';
 
     async createUser(createUser: CreateUserDTO): Promise<UserEntity> {
       try {
-        const user = await sql`INSERT INTO users (name, password) VALUES (${createUser.name}, ${createUser.password}) RETURNING *`
-        return new UserEntity(user.rows[0].id, createUser.name, createUser.password);
+        createUser.password = await hash(createUser.password, 10)
+        const result = await sql`INSERT INTO users (name, email, password) VALUES (${createUser.name}, ${createUser.email}, ${createUser.password}) RETURNING *`
+        const user = result.rows[0]
+        return new UserEntity(user.id, user.name, user.email, user.password);
       } catch (err) {
         if (err.code == 23505) {
           this.logger.error(err.message, err.stack);
@@ -35,7 +38,9 @@ import { sql } from '@vercel/postgres';
     async getAll(): Promise<UserEntity[]> {
       try {
         const users = await sql`SELECT * FROM users`
-        return users.rows.map(user => new UserEntity(user.id, user.name, user.password));
+        return users.rows.map(
+          user => new UserEntity(user.id, user.name, user.email, user.password)
+        );
       } catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
@@ -44,10 +49,15 @@ import { sql } from '@vercel/postgres';
       }
     }
 
-    async updateUser(user: CreateUserDTO, id: number): Promise<UserEntity> {
+    async updateUser(user: CreateUserDTO, id: string): Promise<UserEntity> {
       try {
-        console.log('wip')
-        return new UserEntity(id, user.name, user.password);
+        user.password = await hash(user.password, 10)
+        await sql`
+          UPDATE users 
+          SET name = ${user.name}, email = ${user.email}, password = ${user.password} 
+          WHERE id = ${id}
+        `
+        return new UserEntity(id, user.name, user.email, user.password);
       } catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
@@ -56,10 +66,11 @@ import { sql } from '@vercel/postgres';
       }
     }
 
-    async findOne(name: string): Promise<UserEntity> {
+    async findByEmail(email: string): Promise<UserEntity> {
       try {
-        const user = await sql`SELECT * FROM users WHERE name = ${name}`
-        return new UserEntity(user.rows[0].id, user.rows[0].name, user.rows[0].password);
+        const result = await sql`SELECT * FROM users WHERE email = ${email}`
+        const user = result.rows[0]
+        return new UserEntity(user.id, user.name, user.email, user.password);
       }	catch (err) {
         this.logger.error(err.message, err.stack);
         throw new InternalServerErrorException(
