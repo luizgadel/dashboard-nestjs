@@ -18,7 +18,7 @@ The params for requesting each endpoint can be seen in the following section.
 
 1. Login endpoint
 
-https://www.youtube.com/embed/6olkPquo02Q?si=CHr6NT9Czpt_Rinr
+https://www.youtube.com/watch?v=dFzqRjw_U-Q
 
 2. Profile endpoint
 
