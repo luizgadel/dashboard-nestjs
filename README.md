@@ -26,11 +26,11 @@ The params for requesting each endpoint can be seen in the following section.
 
 3. Users endpoint
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nNEVau69jG4?si=PG88a2du3Kq-M2yH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<video src="https://www.youtube.com/embed/nNEVau69jG4?si=PG88a2du3Kq-M2yH" width="320" height="240" controls></video>
 
 4. Create User endpoint 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+!(Create user endpoint)[https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz]
 
 ## Challenges
 
