@@ -10,7 +10,7 @@ The login endpoint returns a authorization token if the credentials are valid. T
 
 ## Access
 
-The API was deployed in Vercel. It can be accessed through the URL: https://dashboard-nestjs.vercel.app/.
+The API was deployed on Vercel. It can be accessed through the URL: https://dashboard-nestjs.vercel.app/.
 
 The params for requesting each endpoint can be seen in the following section.
 
@@ -36,11 +36,11 @@ https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz
 ## Challenges
 
 ### Deployment
-This is my first time deploying an API and it was actually pretty fast to do so, thanks to the great tutorial I found on how to deploy on . 
+This is my first time deploying an API and it was actually pretty fast to do so, thanks to the great tutorial I found on how to deploy on Vercel. 
 
 The problems emerged when connecting the deployment build to the postgreSQL database on the cloud. Initially, my database connection was managed by TypeORM, but all the modules related with it had to be removed of my imports since Vercel's database didnt support its use. There were other ORM packages supported, but at that moment I chose to use pure SQL to query the database.
 
 ## References
 
-1. [How to deploy a NestJS app for free on vercel](https://www.technog.com.br/blog/tips-and-tricks/how-to-deploy-a-nestjs-app-for-free-on-vercel/)
+1. [How to deploy a NestJS app for free on Vercel](https://www.technog.com.br/blog/tips-and-tricks/how-to-deploy-a-nestjs-app-for-free-on-vercel/)
 2. [NestJS - First steps](https://docs.nestjs.com/first-steps)
