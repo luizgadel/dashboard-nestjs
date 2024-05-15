@@ -18,19 +18,20 @@ The params for requesting each endpoint can be seen in the following section.
 
 1. Login endpoint
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6olkPquo02Q?si=CHr6NT9Czpt_Rinr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+https://www.youtube.com/embed/6olkPquo02Q?si=CHr6NT9Czpt_Rinr
 
 2. Profile endpoint
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JvTBJWoTHPc?si=AH2F6HBniHmgwZIg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+https://www.youtube.com/embed/JvTBJWoTHPc?si=AH2F6HBniHmgwZIg
 
 3. Users endpoint
 
-<video src="https://www.youtube.com/embed/nNEVau69jG4?si=PG88a2du3Kq-M2yH" width="320" height="240" controls></video>
+https://www.youtube.com/embed/nNEVau69jG4?si=PG88a2du3Kq-M2yH
 
 4. Create User endpoint 
 
-!(Create user endpoint)[https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz]
+https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz
+
 
 ## Challenges
 
