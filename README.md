@@ -1,12 +1,13 @@
 # Dashboard NestJS
 
 This project features an API built with NestJS. The API contains the following endpoints:
+- GET "/": Hello World.
 - POST "/auth/login": Login;
 - GET "/auth/profile": get profile logged in;
 - GET "/users/": get registered users;
 - POST "/users/create": create a new user;
 
-The login endpoint returns a authorization token if the credentials are valid. The authorization token can be used to request the other endpoints.
+The login endpoint returns a authentication token, if the credentials are valid. Except for the login and hello world endpoints, all the other endpoints require a valid token on the request's auth header.
 
 ## Access
 
