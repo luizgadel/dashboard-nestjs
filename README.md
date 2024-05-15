@@ -10,7 +10,8 @@ The login endpoint returns a authorization token if the credentials are valid. T
 
 ## Access
 
-The API was deployed in Vercel with a postgreSQL database. It can be accessed through the URL: https://dashboard-nestjs.vercel.app/
+The API was deployed in Vercel. It can be accessed through the URL: https://dashboard-nestjs.vercel.app/.
+
 The params for requesting each endpoint can be seen in the following section.
 
 ## Demonstration
@@ -30,6 +31,13 @@ The params for requesting each endpoint can be seen in the following section.
 4. Create User endpoint 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Challenges
+
+### Deployment
+This is my first time deploying an API and it was actually pretty fast to do so, thanks to the great tutorial I found on how to deploy on . 
+
+The problems emerged when connecting the deployment build to the postgreSQL database on the cloud. Initially, my database connection was managed by TypeORM, but all the modules related with it had to be removed of my imports since Vercel's database didnt support its use. There were other ORM packages supported, but at that moment I chose to use pure SQL to query the database.
 
 ## References
 
