@@ -34,7 +34,7 @@ https://www.youtube.com/embed/nNEVau69jG4?si=PG88a2du3Kq-M2yH
 https://www.youtube.com/embed/dFzqRjw_U-Q?si=8QoMW0_QOaUiiCKz
 
 
-## Challenges
+## Development Notes
 
 ### Deployment
 This is my first time deploying an API and it was actually pretty fast to do so, thanks to the great tutorial I found on how to deploy on Vercel. 
